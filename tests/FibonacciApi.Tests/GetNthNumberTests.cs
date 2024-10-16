@@ -1,14 +1,18 @@
 using FibonacciApi.Application.FibonacciSequence;
+using Microsoft.Extensions.Logging;
+using NSubstitute;
 
 namespace FibonacciApi.Tests;
 
 public class GetNthNumberTests
 {
+    private readonly ILogger<GetNthNumber> _logger;
     private readonly GetNthNumber _sut;
 
     public GetNthNumberTests()
     {
-        _sut = new GetNthNumber();
+        _logger = Substitute.For<ILogger<GetNthNumber>>();
+        _sut = new GetNthNumber(_logger);
     }
 
     [Theory]

@@ -15,17 +15,15 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<GlobalExceptionHandlerMiddleware>();
 builder.Services.AddTransient<LogRequestMiddleware>();
 builder.Services.AddHealthChecks();
+builder.Services.AddLogging(configure => configure.AddConsole());
 
 builder.Services.AddFibonacciServices();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
