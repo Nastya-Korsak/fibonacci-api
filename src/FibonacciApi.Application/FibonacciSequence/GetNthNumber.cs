@@ -1,4 +1,6 @@
 ﻿using FibonacciApi.Application.FibonacciSequence.FibonacciSequence.Interfaces;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Concurrent;
 
 namespace FibonacciApi.Application.FibonacciSequence;
@@ -6,9 +8,12 @@ namespace FibonacciApi.Application.FibonacciSequence;
 public class GetNthNumber : IGetNthNumber
 {
     private readonly ConcurrentDictionary <int, int> fibonacciSequence = new();
+    private readonly ILogger<GetNthNumber> _logger;
 
-    public GetNthNumber()
+    public GetNthNumber(ILogger<GetNthNumber> logger)
     {
+        _logger = logger;
+
         fibonacciSequence.TryAdd(0, 0);
         fibonacciSequence.TryAdd(1, 1);
     }
